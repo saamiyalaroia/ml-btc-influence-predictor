@@ -1,7 +1,7 @@
 # Crypto Whisperers: Do the Internet's Loudest Voices Move Bitcoin?
 
 **Saamiya Laroia · Tony Chen · Milena Harned · Alexander Liu**  
-Applied Machine Learning · 2025
+Columbia University · Applied Machine Learning · 2025
 
 🌐 [View Project Website](https://saamiyalaroia.github.io/ml-btc-influence-predictor/)
 
