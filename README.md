@@ -1,7 +1,7 @@
 # Crypto Whisperers: Do the Internet's Loudest Voices Move Bitcoin?
 
 **Saamiya Laroia · Tony Chen · Milena Harned · Alexander Liu**  
-Columbia University · Applied Machine Learning · 2025
+Applied Machine Learning · 2025
 
 🌐 [View Project Website](https://saamiyalaroia.github.io/ml-btc-influence-predictor/)
 
@@ -89,6 +89,8 @@ pip install -r requirements.txt
 Tweets were collected from five public figures across two windows:
 - **Training:** January 2018 – December 2022
 - **Testing:** January 2023 – December 2025
+
+Due to Twitter/X API terms of service, raw tweet data is **not included** in this repository. To reproduce data collection, you will need a Twitter/X API key and should replicate the collection queries described in the paper.
 
 ### Bitcoin Prices
 
@@ -188,11 +190,11 @@ Influence weights are normalized relative to Michael Saylor (100%), whose posts 
 
 | Model | Macro-F1 | Notes |
 |-------|----------|-------|
-| v1 (baseline, no weights) | 0.289 | Majority-class collapse |
-| v3 (±1% threshold + class weights) | ~0.310 | Unfiltered test set |
-| v4 (+ keyword filter on train+test) | 0.334 | Corrected evaluation |
-| **v5 (+ lookahead-safe labeling, chronological split)** | **0.329** | **Final model** |
-| v6 (+ username prepended to BERT input) | 0.318 | Underperformed v5 |
+| v1 | 0.289 | Majority-class collapse |
+| v3 | ~0.310 | Unfiltered test set |
+| v4 | 0.334 | Corrected evaluation |
+| **v5** | **0.329** | **Final model** |
+| v6 | 0.318 | Underperformed v5 |
 
 **Per-speaker test accuracy (2023–2025):**
 
@@ -230,8 +232,6 @@ Do the Internet's Loudest Voices Move Bitcoin?
 Some files exceed GitHub's size limit and are not included in this repository. This includes model weights (`best_model.pt`) and any large data files. You can download them here:
 
 📁 [Google Drive — Large Files](https://drive.google.com/file/d/1CZacwoDmkMLDd0t79si4ISXC1fnZGgnd/view?usp=drive_link)
-
-After downloading, place the files in their corresponding folders as described in the repository structure above.
 
 ---
 
