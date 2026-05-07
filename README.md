@@ -1,3 +1,3 @@
 # Crypto Whisperers: Do the Internet’s Loudest Voices Move Bitcoin?
-
-STAT UN3106 – Spring 2026 | Saamiya Laroia, Milena Harned, Tony Chen, Alexander Liu
+Authors: Saamiya Laroia, Milena Harned, Tony Chen, Alexander Liu
+Final Project | STAT UN3106 – Spring 2026 
