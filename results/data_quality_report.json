@@ -1,0 +1,89 @@
+{
+  "config": {
+    "start_date": "2023-03-24",
+    "end_date": "2025-03-24",
+    "n_sources": 5
+  },
+  "per_source": [
+    {
+      "source": "elonmusk",
+      "filename": "elonmusk_posts.csv",
+      "kind": "csv",
+      "note": "Kaggle 'all_musk_posts'; lacks a username column \u2014 populated from canonical_username at load time.",
+      "rows_raw": 55099,
+      "rows_after_required": 55099,
+      "rows_after_dedup": 55099,
+      "rows_after_window": 30820,
+      "rows_final": 30820,
+      "warnings": []
+    },
+    {
+      "source": "realDonaldTrump",
+      "filename": "realDonaldTrump_posts.csv",
+      "kind": "csv",
+      "note": "Kaggle 'djt_posts_dec2025'. Mixes X and Truth Social posts; Truth Social rows are kept because the model treats the text as content, not platform-tagged.",
+      "rows_raw": 90343,
+      "rows_after_required": 90340,
+      "rows_after_dedup": 90340,
+      "rows_after_window": 20923,
+      "rows_final": 20923,
+      "warnings": []
+    },
+    {
+      "source": "cz_binance",
+      "filename": "cz_binance.xlsx",
+      "kind": "xlsx",
+      "note": "Apify scrape; Chinese column headers from the scraper's locale.",
+      "rows_raw": 703,
+      "rows_after_required": 702,
+      "rows_after_dedup": 701,
+      "rows_after_window": 701,
+      "rows_final": 701,
+      "warnings": []
+    },
+    {
+      "source": "VitalikButerin",
+      "filename": "VitalikButerin.xlsx",
+      "kind": "xlsx",
+      "note": "Apify scrape; small sample (only ~275 rows in 2-year window).",
+      "rows_raw": 275,
+      "rows_after_required": 210,
+      "rows_after_dedup": 155,
+      "rows_after_window": 154,
+      "rows_final": 154,
+      "warnings": []
+    },
+    {
+      "source": "saylor",
+      "filename": "saylor.xlsx",
+      "kind": "xlsx",
+      "note": "Apify scrape; ~1.6k rows.",
+      "rows_raw": 1645,
+      "rows_after_required": 1645,
+      "rows_after_dedup": 1641,
+      "rows_after_window": 1290,
+      "rows_final": 1290,
+      "warnings": []
+    }
+  ],
+  "global_dedup": {
+    "rows_pre": 53888,
+    "rows_post": 53880,
+    "rows_dropped": 8
+  },
+  "per_account_totals": {
+    "VitalikButerin": 154,
+    "cz_binance": 701,
+    "elonmusk": 30820,
+    "realDonaldTrump": 20915,
+    "saylor": 1290
+  },
+  "per_account_crypto": {
+    "VitalikButerin": 81,
+    "cz_binance": 343,
+    "elonmusk": 3237,
+    "realDonaldTrump": 1780,
+    "saylor": 1114
+  },
+  "crypto_share_overall": 0.12165924276169265
+}
