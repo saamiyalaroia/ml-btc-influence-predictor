@@ -13,77 +13,6 @@ In 2021, Elon Musk added '#bitcoin' to his Twitter bio. Bitcoin jumped 20% in ho
 
 ---
 
-## Repository Structure
-
-```
-ml-btc-influence-predictor/
-│
-├── src/
-│   ├── main.py                  # runs full pipeline
-│   ├── train.py                 # BERT fine-tuning loop
-│   ├── model.py                 # BERT + MLP classifier definition
-│   ├── config.py                # Hyperparameters and run settings
-│   ├── dataset.py               # PyTorch Dataset class
-│   ├── data_loading.py          # Loads and merges tweet + BTC price data
-│   ├── labeling.py              # Assigns up/flat/down labels (±1% threshold)
-│   ├── influence_weights.py     # Computes per-speaker historical influence weights
-│   ├── btc_prices.py            # Fetches and processes hourly BTC price data
-│   ├── backtest.py              # Backtesting simulation on test predictions
-│   └── visualize.py             # Generates all plots and figures
-│
-├── data/
-│   ├── mendelay/                # Reference data
-│   ├── all_tweets.csv           # Raw collected tweets from all five speakers
-│   ├── btc_prices_1h.csv        # Hourly BTC price data
-│   ├── influence_weights.json   # Computed per-speaker influence weights
-│   ├── labeled_tweets.csv       # Tweets with up/flat/down labels assigned
-│   └── test_split.csv           # Chronological test split
-│
-├── models/
-│   ├── tokenizer/               # Saved BERT tokenizer
-│   ├── run_config.json          # Hyperparameters used in final run
-│   ├── split_report.json        # Train/val/test split statistics
-│   ├── test_report.json         # Per-class metrics on test set
-│   └── training_history.json    # Loss and accuracy per epoch
-│    
-│
-├── results/
-│   ├── runs/                    # Per-run logs
-│   ├── backtest_metrics.json
-│   ├── backtest_results.csv
-│   ├── data_quality_report.json
-│   └── influence_by_period.csv  # Quarterly influence weights per speaker
-│
-├── assets/
-│   ├── 01_btc_price_history.png
-│   ├── 02_btc_price_with_tweets.png
-│   ├── 03_training_history.png
-│   ├── 04_confusion_matrix_test.png
-│   ├── 05_classification_report_test.png
-│   ├── 06_label_distribution.png
-│   ├── 07_influence_weights.png
-│   ├── 08_influence_over_time.png
-│   ├── 09_backtest_accuracy_over_time.png
-│   ├── 10_backtest_heatmap_accuracy.png
-│   ├── 11_per_person_accuracy.png
-│   ├── 12_quantified_return_scatter.png
-│   └── 13_future_price_projection.png
-│
-├── docs/
-│   ├── assets/
-│   ├── PROJECT_TEMPLATE.md
-│   └── index.html               # GitHub Pages site source
-│
-├── notebook/
-│   └── finalnotebook.ipynb      # End-to-end walkthrough notebook
-│
-├── requirements.txt
-├── README.md
-└── LICENSE
-```
-
----
-
 ## Setup
 
 ### Prerequisites
@@ -213,6 +142,77 @@ Generates all figures (loss curves, per-speaker accuracy, quarterly influence we
 | Michael Saylor | 43.9% | 157 |
 
 *Random baseline: 33%*
+
+---
+
+## Repository Structure
+
+```
+ml-btc-influence-predictor/
+│
+├── src/
+│   ├── main.py                  # runs full pipeline
+│   ├── train.py                 # BERT fine-tuning loop
+│   ├── model.py                 # BERT + MLP classifier definition
+│   ├── config.py                # Hyperparameters and run settings
+│   ├── dataset.py               # PyTorch Dataset class
+│   ├── data_loading.py          # Loads and merges tweet + BTC price data
+│   ├── labeling.py              # Assigns up/flat/down labels (±1% threshold)
+│   ├── influence_weights.py     # Computes per-speaker historical influence weights
+│   ├── btc_prices.py            # Fetches and processes hourly BTC price data
+│   ├── backtest.py              # Backtesting simulation on test predictions
+│   └── visualize.py             # Generates all plots and figures
+│
+├── data/
+│   ├── mendelay/                # Reference data
+│   ├── all_tweets.csv           # Raw collected tweets from all five speakers
+│   ├── btc_prices_1h.csv        # Hourly BTC price data
+│   ├── influence_weights.json   # Computed per-speaker influence weights
+│   ├── labeled_tweets.csv       # Tweets with up/flat/down labels assigned
+│   └── test_split.csv           # Chronological test split
+│
+├── models/
+│   ├── tokenizer/               # Saved BERT tokenizer
+│   ├── run_config.json          # Hyperparameters used in final run
+│   ├── split_report.json        # Train/val/test split statistics
+│   ├── test_report.json         # Per-class metrics on test set
+│   └── training_history.json    # Loss and accuracy per epoch
+│    
+│
+├── results/
+│   ├── runs/                    # Per-run logs
+│   ├── backtest_metrics.json
+│   ├── backtest_results.csv
+│   ├── data_quality_report.json
+│   └── influence_by_period.csv  # Quarterly influence weights per speaker
+│
+├── assets/
+│   ├── 01_btc_price_history.png
+│   ├── 02_btc_price_with_tweets.png
+│   ├── 03_training_history.png
+│   ├── 04_confusion_matrix_test.png
+│   ├── 05_classification_report_test.png
+│   ├── 06_label_distribution.png
+│   ├── 07_influence_weights.png
+│   ├── 08_influence_over_time.png
+│   ├── 09_backtest_accuracy_over_time.png
+│   ├── 10_backtest_heatmap_accuracy.png
+│   ├── 11_per_person_accuracy.png
+│   ├── 12_quantified_return_scatter.png
+│   └── 13_future_price_projection.png
+│
+├── docs/
+│   ├── assets/
+│   ├── PROJECT_TEMPLATE.md
+│   └── index.html               # GitHub Pages site source
+│
+├── notebook/
+│   └── finalnotebook.ipynb      # End-to-end walkthrough notebook
+│
+├── requirements.txt
+├── README.md
+└── LICENSE
+```
 
 ---
 
