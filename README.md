@@ -1,7 +1,7 @@
 # Crypto Whisperers: Do the Internet's Loudest Voices Move Bitcoin?
 
 **Saamiya Laroia · Tony Chen · Milena Harned · Alexander Liu**  
-Columbia University · Applied Machine Learning · 2025
+Applied Machine Learning · 2025
 
 🌐 [View Project Website](https://saamiyalaroia.github.io/ml-btc-influence-predictor/)
 
@@ -16,42 +16,70 @@ In 2021, Elon Musk added '#bitcoin' to his Twitter bio. Bitcoin jumped 20% in ho
 ## Repository Structure
 
 ```
-crypto-whisperers/
+ml-btc-influence-predictor/
 │
 ├── src/
-│   ├── main.py              # Entry point: runs full pipeline
-│   ├── train.py             # BERT fine-tuning loop
-│   ├── model.py             # BERT + MLP classifier definition
-│   ├── config.py            # Hyperparameters and run settings
-│   ├── dataset.py           # PyTorch Dataset class
-│   ├── data_loading.py      # Loads and merges tweet + BTC price data
-│   ├── labeling.py          # Assigns up/flat/down labels (±1% threshold)
-│   ├── influence_weights.py # Computes per-speaker historical influence weights
-│   ├── btc_prices.py        # Fetches and processes hourly BTC price data
-│   ├── backtest.py          # Backtesting simulation on test predictions
-│   └── visualize.py         # Generates all plots and figures
+│   ├── main.py                  # Entry point: runs full pipeline
+│   ├── train.py                 # BERT fine-tuning loop
+│   ├── model.py                 # BERT + MLP classifier definition
+│   ├── config.py                # Hyperparameters and run settings
+│   ├── dataset.py               # PyTorch Dataset class
+│   ├── data_loading.py          # Loads and merges tweet + BTC price data
+│   ├── labeling.py              # Assigns up/flat/down labels (±1% threshold)
+│   ├── influence_weights.py     # Computes per-speaker historical influence weights
+│   ├── btc_prices.py            # Fetches and processes hourly BTC price data
+│   ├── backtest.py              # Backtesting simulation on test predictions
+│   └── visualize.py             # Generates all plots and figures
 │
-├── notebook/
-│   └── finalnotebook.ipynb  # End-to-end walkthrough notebook
-│
-├── data/                    # Raw and processed tweet + price data (see note below)
+├── data/
+│   ├── mendelay/                # Reference data
+│   ├── all_tweets.csv           # Raw collected tweets from all five speakers
+│   ├── btc_prices_1h.csv        # Hourly BTC price data
+│   ├── influence_weights.json   # Computed per-speaker influence weights
+│   ├── labeled_tweets.csv       # Tweets with up/flat/down labels assigned
+│   └── test_split.csv           # Chronological test split
 │
 ├── models/
-│   ├── best_model.pt        # Saved model weights (v5)
-│   ├── tokenizer/           # Saved BERT tokenizer
-│   ├── run_config.json      # Hyperparameters used in final run
-│   ├── training_history.json
-│   ├── split_report.json    # Train/val/test split statistics
-│   └── test_report.json     # Per-class metrics on test set
+│   ├── tokenizer/               # Saved BERT tokenizer
+│   ├── run_config.json          # Hyperparameters used in final run
+│   ├── split_report.json        # Train/val/test split statistics
+│   ├── test_report.json         # Per-class metrics on test set
+│   └── training_history.json    # Loss and accuracy per epoch
+│   └── best_model.pt            # ⚠️ Too large for GitHub — download from Google Drive
 │
 ├── results/
+│   ├── runs/                    # Per-run logs
 │   ├── backtest_metrics.json
 │   ├── backtest_results.csv
 │   ├── data_quality_report.json
-│   ├── influence_by_period.csv   # Quarterly influence weights per speaker
-│   └── runs/                     # Per-run logs
+│   └── influence_by_period.csv  # Quarterly influence weights per speaker
 │
-└── assets/                  # All generated figures (loss curves, influence charts, etc.)
+├── assets/
+│   ├── 01_btc_price_history.png
+│   ├── 02_btc_price_with_tweets.png
+│   ├── 03_training_history.png
+│   ├── 04_confusion_matrix_test.png
+│   ├── 05_classification_report_test.png
+│   ├── 06_label_distribution.png
+│   ├── 07_influence_weights.png
+│   ├── 08_influence_over_time.png
+│   ├── 09_backtest_accuracy_over_time.png
+│   ├── 10_backtest_heatmap_accuracy.png
+│   ├── 11_per_person_accuracy.png
+│   ├── 12_quantified_return_scatter.png
+│   └── 13_future_price_projection.png
+│
+├── docs/
+│   ├── assets/
+│   ├── PROJECT_TEMPLATE.md
+│   └── index.html               # GitHub Pages site source
+│
+├── notebook/
+│   └── finalnotebook.ipynb      # End-to-end walkthrough notebook
+│
+├── requirements.txt
+├── README.md
+└── LICENSE
 ```
 
 ---
