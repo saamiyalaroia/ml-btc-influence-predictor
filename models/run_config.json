@@ -1,0 +1,144 @@
+{
+  "run_id": "20260426T040627Z",
+  "filter_mode": "crypto_only",
+  "best_epoch": 3,
+  "best_metric": {
+    "val_macro_f1": 0.3709440835971498
+  },
+  "device": "mps",
+  "elapsed_sec": 680.4268810749054,
+  "config": {
+    "accounts": [
+      "realDonaldTrump",
+      "elonmusk",
+      "cz_binance",
+      "VitalikButerin",
+      "saylor"
+    ],
+    "data_sources": [
+      {
+        "canonical_username": "elonmusk",
+        "filename": "elonmusk_posts.csv",
+        "file_kind": "csv",
+        "column_map": {
+          "tweet_id": "id",
+          "text": "fullText",
+          "created_at": "createdAt",
+          "likes": "likeCount",
+          "retweets": "retweetCount"
+        },
+        "note": "Kaggle 'all_musk_posts'; lacks a username column \u2014 populated from canonical_username at load time."
+      },
+      {
+        "canonical_username": "realDonaldTrump",
+        "filename": "realDonaldTrump_posts.csv",
+        "file_kind": "csv",
+        "column_map": {
+          "tweet_id": "id",
+          "username": "handle",
+          "text": "text",
+          "created_at": "date",
+          "likes": "favorite_count",
+          "retweets": "repost_count"
+        },
+        "note": "Kaggle 'djt_posts_dec2025'. Mixes X and Truth Social posts; Truth Social rows are kept because the model treats the text as content, not platform-tagged."
+      },
+      {
+        "canonical_username": "cz_binance",
+        "filename": "cz_binance.xlsx",
+        "file_kind": "xlsx",
+        "column_map": {
+          "tweet_id": "postid",
+          "username": "screen_name",
+          "text": "\u6807\u9898",
+          "created_at": "\u53d1\u5e16\u65f6\u95f4",
+          "likes": "\u559c\u6b22",
+          "retweets": "\u8f6c\u53d1"
+        },
+        "note": "Apify scrape; Chinese column headers from the scraper's locale."
+      },
+      {
+        "canonical_username": "VitalikButerin",
+        "filename": "VitalikButerin.xlsx",
+        "file_kind": "xlsx",
+        "column_map": {
+          "tweet_id": "postid",
+          "username": "screen_name",
+          "text": "\u6807\u9898",
+          "created_at": "\u53d1\u5e16\u65f6\u95f4",
+          "likes": "\u559c\u6b22",
+          "retweets": "\u8f6c\u53d1"
+        },
+        "note": "Apify scrape; small sample (only ~275 rows in 2-year window)."
+      },
+      {
+        "canonical_username": "saylor",
+        "filename": "saylor.xlsx",
+        "file_kind": "xlsx",
+        "column_map": {
+          "tweet_id": "postid",
+          "username": "screen_name",
+          "text": "\u6807\u9898",
+          "created_at": "\u53d1\u5e16\u65f6\u95f4",
+          "likes": "\u559c\u6b22",
+          "retweets": "\u8f6c\u53d1"
+        },
+        "note": "Apify scrape; ~1.6k rows."
+      }
+    ],
+    "start_date": "2023-03-24",
+    "end_date": "2025-03-24",
+    "up_threshold": 0.01,
+    "down_threshold": -0.01,
+    "bert_model": "bert-base-uncased",
+    "max_length": 128,
+    "batch_size": 16,
+    "num_epochs": 5,
+    "learning_rate": 1e-05,
+    "dropout": 0.3,
+    "seed": 42,
+    "filter_mode": "crypto_only",
+    "split": {
+      "train_frac": 0.7,
+      "val_frac": 0.1,
+      "test_frac": 0.2
+    },
+    "early_stopping": {
+      "patience": 2,
+      "min_delta": 0.001,
+      "metric": "val_macro_f1"
+    }
+  },
+  "split_report": {
+    "n_total": 6555,
+    "fractions": {
+      "train": 0.7,
+      "val": 0.1,
+      "test": 0.20000000000000004
+    },
+    "n": {
+      "train": 4588,
+      "val": 656,
+      "test": 1311
+    },
+    "ranges": {
+      "train": [
+        "2023-03-24 03:49:44+00:00",
+        "2024-10-01 20:13:27+00:00"
+      ],
+      "val": [
+        "2024-10-02 00:51:32+00:00",
+        "2024-12-02 08:47:28+00:00"
+      ],
+      "test": [
+        "2024-12-02 10:31:32+00:00",
+        "2025-03-23 22:29:31+00:00"
+      ]
+    }
+  },
+  "test_metrics": {
+    "loss": 1.118210923380968,
+    "accuracy": 0.627765064836003,
+    "macro_f1": 0.328552143063511
+  }
+}
