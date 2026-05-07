@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto Whisperers — Do the Internet's Loudest Voices Move Bitcoin?</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+    :root {
+      --green:#1a5c45;--green-mid:#2a7a5a;--teal:#1a6b78;--blue:#1e3f6e;
+      --black:#111111;--body-text:#1a1a1a;--muted:#666666;
+      --rule:#bbbbbb;--rule-light:#e0e0e0;--bg:#ffffff;--bg2:#f8f8f6;
+      --sidebar-w:210px;
+      --font:'EB Garamond',Georgia,'Times New Roman',serif;
+      --mono:'Courier New',Courier,monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--body-text);font-family:var(--font);font-size:17px;line-height:1.85;overflow-x:hidden;}
+
+    /* SHELL */
+    .shell{display:flex;min-height:100vh;}
+
+    /* SIDEBAR */
+    aside.sidebar{width:var(--sidebar-w);min-width:var(--sidebar-w);position:sticky;top:0;height:100vh;overflow-y:auto;border-right:1px solid var(--rule);display:flex;flex-direction:column;background:var(--bg);z-index:100;flex-shrink:0;}
+    .sidebar-header{padding:1.8rem 1.4rem 1.2rem;border-bottom:1px solid var(--rule-light);}
+    .sidebar-title{font-family:var(--font);font-size:.82rem;font-weight:600;color:var(--black);line-height:1.4;margin-bottom:.4rem;}
+    .sidebar-authors{font-family:var(--font);font-size:.72rem;font-style:italic;color:var(--muted);line-height:1.6;}
+    .toc-label{padding:.9rem 1.4rem .4rem;font-family:var(--font);font-size:.65rem;font-style:italic;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--rule-light);}
+    nav.toc{padding:.5rem 0;}
+    nav.toc a{display:block;padding:.3rem 1.4rem;font-family:var(--font);font-size:.8rem;color:var(--muted);text-decoration:none;line-height:1.4;border-left:2px solid transparent;transition:color .15s,border-color .15s,background .15s;}
+    nav.toc a:hover{color:var(--green);background:#f0f5f3;}
+    nav.toc a.active{color:var(--green);border-left-color:var(--green);background:#f0f5f3;font-style:italic;}
+    .sidebar-github{margin-top:auto;padding:1rem 1.4rem;border-top:1px solid var(--rule-light);}
+    .sidebar-github a{font-family:var(--mono);font-size:10px;color:var(--teal);text-decoration:none;letter-spacing:.05em;}
+    .sidebar-github a:hover{text-decoration:underline;}
+
+    /* MAIN */
+    .main-content{flex:1;min-width:0;padding:0 3rem;max-width:760px;}
+
+    /* MASTHEAD */
+    .masthead{padding:4rem 0 3rem;text-align:center;background:#fff;}
+    .btc-spin{display:inline-block;font-size:2.8rem;animation:spin 8s linear infinite;margin-bottom:1rem;filter:drop-shadow(0 2px 8px rgba(26,92,69,0.15));}
+    @keyframes spin{from{transform:rotateY(0deg);}to{transform:rotateY(360deg);}}
+    .main-title{font-family:var(--font);font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.15;color:var(--black);max-width:680px;margin:0 auto 0.5rem;letter-spacing:-0.01em;}
+    .main-title em{font-style:italic;color:var(--green);display:block;font-size:0.92em;}
+    .authors{font-family:var(--font);font-size:15px;font-style:normal;color:var(--body-text);margin-top:1rem;}
+    .authors a{font-style:normal;font-size:11px;color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal);padding-bottom:1px;margin-left:.5rem;font-family:var(--mono);}
+    .authors a:hover{color:var(--green);border-color:var(--green);}
+
+    /* KEYWORDS */
+    .keywords-bar{display:flex;flex-wrap:wrap;padding:1.2rem 0;border-bottom:1px solid var(--rule);align-items:baseline;font-family:var(--font);font-size:14px;}
+    .kw-label{font-style:italic;color:var(--body-text);margin-right:.4rem;}
+    .kw{color:var(--body-text);}
+    .kw:not(:last-child)::after{content:',\00a0';}
+
+    /* ABSTRACT */
+    .abstract{padding:2rem 0;border-bottom:1px solid var(--rule);}
+    h3.abstract-heading{font-family:var(--font);font-size:1.05rem;font-weight:600;font-style:italic;color:var(--black);text-align:center;margin-bottom:.8rem;}
+    .abstract-box{padding:1.2rem 1.8rem;background:#eef5f1;border-left:3px solid var(--green);}
+    .abstract p{font-size:15px;color:var(--body-text);line-height:1.9;text-align:justify;margin-bottom:0;}
+
+    /* SECTIONS */
+    section{padding:2rem 0;border-bottom:1px solid var(--rule-light);scroll-margin-top:2rem;}
+    section:last-child{border-bottom:none;}
+    h2.section-heading{font-family:var(--font);font-size:1.4rem;font-weight:600;color:var(--black);line-height:1.3;margin-bottom:1.2rem;border-bottom:1px solid var(--rule);padding-bottom:.4rem;}
+    p{margin-bottom:1.1rem;color:var(--body-text);font-size:16px;text-align:justify;}
+    p:last-child{margin-bottom:0;}
+    p.fig-label{font-size:12px;font-style:italic;color:var(--muted);margin-bottom:.5rem;text-align:left;}
+
+    /* TABLE */
+    .speakers{width:100%;border-collapse:collapse;margin:1.5rem 0;font-family:var(--font);font-size:14px;}
+    .speakers thead tr{border-top:2px solid var(--black);border-bottom:1px solid var(--black);}
+    .speakers th{font-style:italic;font-weight:600;color:var(--black);padding:.5rem 1rem .5rem 0;text-align:left;font-size:13px;}
+    .speakers td{padding:.6rem 1rem .6rem 0;border-bottom:1px solid var(--rule-light);color:var(--body-text);vertical-align:top;line-height:1.5;}
+    .speakers tbody tr:last-child td{border-bottom:1px solid var(--black);}
+    .speaker-name{font-weight:600;}
+    .follower-count{font-family:var(--mono);color:var(--teal);font-size:12px;}
+
+    /* ACC BARS */
+    .acc-bars{margin:1.2rem 0;}
+    .acc-row{display:grid;grid-template-columns:130px 1fr 80px;align-items:center;gap:.8rem;padding:.45rem 0;border-bottom:1px solid var(--rule-light);}
+    .acc-row:last-child{border-bottom:none;}
+    .acc-name{font-family:var(--font);font-size:13px;color:var(--body-text);}
+    .acc-track{background:var(--rule-light);height:7px;position:relative;overflow:hidden;}
+    .acc-fill{height:100%;transform:scaleX(0);transform-origin:left;transition:transform 1.2s cubic-bezier(.16,1,.3,1);background:var(--green);}
+    .acc-fill.animated{transform:scaleX(1);}
+    .acc-fill.best{background:var(--green);}
+    .acc-fill.good{background:var(--green-mid);}
+    .acc-fill.mid{background:var(--teal);}
+    .acc-fill.lower{background:#5a8a6e;}
+    .acc-fill.low{background:#999999;}
+    .acc-baseline{position:absolute;top:0;bottom:0;left:33%;width:1px;background:var(--blue);opacity:.5;}
+    .acc-pct{font-family:var(--mono);font-size:11px;color:var(--green);text-align:right;}
+
+    /* ARCH */
+    .arch-diagram{margin:1.5rem 0;padding:1.5rem;background:var(--bg2);border:1px solid var(--rule);font-family:var(--font);}
+    .arch-box{padding:.4rem .8rem;text-align:center;min-width:130px;border:1px solid var(--rule);background:#fff;}
+    .arch-box.tweet{border-color:var(--blue);color:var(--blue);}
+    .arch-box.author{border-color:var(--teal);color:var(--teal);}
+    .arch-box.bert{border-color:var(--green);color:var(--green);font-weight:600;}
+    .arch-box.infl{border-color:var(--teal);color:var(--teal);}
+    .arch-box.mlp{border-color:var(--green);color:var(--green);font-weight:600;}
+    .arch-box.out-up{border-color:var(--green);color:var(--green);}
+    .arch-box.out-flat{border-color:var(--teal);color:var(--teal);}
+    .arch-box.out-down{border-color:#8b1a1a;color:#8b1a1a;}
+    .arch-label{font-size:11px;font-style:italic;}
+    .arch-sub{font-size:9px;color:var(--muted);margin-top:2px;font-style:normal;}
+
+    /* REFERENCES */
+    .references-list{list-style:none;counter-reset:refs;}
+    .references-list li{counter-increment:refs;display:flex;gap:.8rem;padding:.5rem 0;border-bottom:1px solid var(--rule-light);font-size:14px;color:var(--body-text);line-height:1.6;}
+    .references-list li:last-child{border-bottom:1px solid var(--rule);padding-bottom:1rem;}
+    .references-list li::before{content:"[" counter(refs) "]";font-family:var(--mono);font-size:10px;color:var(--green);min-width:28px;padding-top:3px;flex-shrink:0;}
+    .references-list a{color:var(--teal);text-decoration:none;word-break:break-all;}
+    .references-list a:hover{text-decoration:underline;}
+
+    /* FOOTER */
+    footer{padding:1.5rem 0;text-align:center;margin-top:.5rem;}
+    .footer-rule{font-family:var(--font);font-size:13px;font-style:italic;color:var(--muted);}
+    .github-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:.8rem;font-family:var(--mono);font-size:10px;color:var(--teal);text-decoration:none;border:1px solid var(--teal);padding:.3rem .8rem;transition:background .2s,color .2s;}
+    .github-link:hover{background:var(--teal);color:#fff;}
+    .github-link svg{width:12px;height:12px;fill:currentColor;}
+
+
+    figure { margin: 1.5rem 0; }
+    figure img { width: 100%; border: 1px solid var(--rule-light); display: block; }
+    figcaption { font-family: var(--font); font-size: 13px; font-style: italic; color: var(--muted); margin-top: 0.5rem; line-height: 1.5; }
+    /* FADE */
+    .fade-in{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease;}
+    .fade-in.visible{opacity:1;transform:none;}
+
+    @media(max-width:768px){
+      .shell{flex-direction:column;}
+      aside.sidebar{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--rule);}
+      nav.toc{display:flex;flex-wrap:wrap;padding:.4rem;}
+      nav.toc a{padding:.2rem .6rem;border-left:none;border-bottom:2px solid transparent;font-size:.75rem;}
+      nav.toc a.active{border-bottom-color:var(--green);border-left:none;}
+      .main-content{padding:0 1.5rem;}
+      p,.abstract p{text-align:left;}
+      .acc-row{grid-template-columns:90px 1fr 55px;}
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Crypto Whisperers</div>
+    <div class="sidebar-authors">Laroia &middot; Chen &middot; Harned &middot; Liu</div>
+  </div>
+  <div class="toc-label">Contents</div>
+  <nav class="toc">
+    <a href="#abstract">Abstract</a>
+    <a href="#influence">The Case for Studying Influence</a>
+    <a href="#bitcoin">How Bitcoin Works and Why It Moves</a>
+    <a href="#literature">Literature Review</a>
+    <a href="#model">Our Model</a>
+    <a href="#data">Data</a>
+    <a href="#results">Results</a>
+    <a href="#modeldevelopment">Model Development: Six Versions</a>
+    <a href="#discussion">Discussion</a>
+    <a href="#deeplearning">The Importance of Deep Learning</a>
+    <a href="#nextsteps">Next Steps</a>
+    <a href="#ethics">Ethics and Other Implications</a>
+    <a href="#references">Works Cited</a>
+  </nav>
+  <div class="sidebar-github">
+    <a href="https://github.com/saamiyalaroia/ml-btc-influence-predictor" target="_blank" rel="noopener">&#x2197; GitHub Repository</a>
+  </div>
+</aside>
+
+<div class="main-content">
+
+  <header class="masthead">
+    <div class="btc-spin">₿</div>
+    <h1 class="main-title">Crypto Whisperers:<em>Do the Internet&rsquo;s Loudest Voices Move Bitcoin?</em></h1>
+    <div class="authors">
+      Saamiya Laroia &nbsp;&middot;&nbsp; Tony Chen &nbsp;&middot;&nbsp; Milena Harned &nbsp;&middot;&nbsp; Alexander Liu
+      <a href="https://github.com/saamiyalaroia/ml-btc-influence-predictor" target="_blank" rel="noopener">&#x2197; GitHub</a>
+    </div>
+  </header>
+
+  <div class="keywords-bar fade-in">
+    <span class="kw-label">Keywords:</span>
+    <span class="kw">Bitcoin</span>
+    <span class="kw">Sentiment Analysis</span>
+    <span class="kw">BERT</span>
+    <span class="kw">Natural Language Processing</span>
+    <span class="kw">Cryptocurrency</span>
+    <span class="kw">Social Media Influence</span>
+    <span class="kw">Price Prediction</span>
+    <span class="kw">Historical Influence Weight</span>
+  </div>
+
+  <section id="abstract" class="abstract fade-in">
+    <h3 class="abstract-heading">Abstract</h3>
+    <div class="abstract-box">
+      <p>In 2021, Elon Musk added &lsquo;#bitcoin&rsquo; to his Twitter bio. Bitcoin jumped 20% in hours. We live in an era where social media has given a handful of individuals the ability to shape market expectations in real time. Cryptocurrency, with no central bank and no earnings reports, is uniquely hypersensitive to sentiment and influence. We ask whether the public statements of five such figures contain a consistent, learnable signal about the direction of Bitcoin prices. Our project explores this question by fine-tuning BERT on labeled tweet data from January 2018 through December 2025, paired with a two-layer MLP classifier, to predict whether Bitcoin&rsquo;s price moves up, down, or stays flat in the 4 hours following a post. While prior work has focused on aggregate social media sentiment, we shift attention to individual voices, introducing a &ldquo;historical influence weight&rdquo; for each figure derived from their average absolute impact on Bitcoin returns in the hours following a post. Who is speaking, we argue, matters as much as what is being said.</p>
+    </div>
+  </section>
+
+  <section id="influence" class="fade-in">
+    <h2 class="section-heading">The Case for Studying Influence in Crypto Markets</h2>
+    <p>On October 31st, 2008, Satoshi Nakamoto published &ldquo;Bitcoin: A Peer-to-Peer Electronic Cash System,&rdquo; outlining a method for &ldquo;online payments to be sent directly from one party to another without going through a financial institution&rdquo; (Nakamoto). Built on cryptography and a decentralized network, it eliminated the need for a bank as an intermediary entirely. It launched on January 3, 2009, becoming the first successful digital currency (Royal).</p>
+    <p>In the two decades since, Bitcoin has grown from a nine-page whitepaper into a trillion-dollar asset class. The first recorded transaction of Bitcoin priced it at less than one-tenth of one cent (Royal). Now, Bitcoin trades at tens of thousands of dollars, and surpassed the $100,000 mark in early December 2024 (Quiroz-Gutierrez). Along the way, the forces that move its price have remained stubbornly difficult to pin down. Unlike traditional assets, it offers no earnings, no dividends, and no central bank guidance to model from. Even news coverage, which reliably moves stock prices, appears to offer little traction here. A study of over 63,000 headlines from CoinDesk, one of the cryptocurrency industry&rsquo;s leading news publications, spanning 2014 to 2025 found no evidence that news coverage predicts Bitcoin&rsquo;s daily price movements (Robson). The researchers themselves acknowledged that the limitation of their study was focusing only on Coindesk, which &ldquo;left out the myriad of social platforms such as X, Reddit or Telegram, which is often used by crypto traders to share information more quickly&rdquo; (Robson). This project addresses that gap directly, examining the social media posts of five high-profile individuals whose commentary reaches millions of traders in real time.</p>
+  </section>
+
+  <section id="bitcoin" class="fade-in">
+    <h2 class="section-heading">How Bitcoin Works and Why It Moves</h2>
+    <p>Bitcoin&rsquo;s sensitivity to individual voices is a product of how the asset is structured. Unlike equities, Bitcoin has a hard supply cap of 21 million coins, so when demand rises, there are no new coins to issue and prices bear the full force of that shift (Reiff). Transactions are verified through a process called mining, in which computers compete to solve complex cryptographic puzzles and record transactions on a shared public ledger known as the blockchain. Miners who succeed are rewarded with new Bitcoin, a mechanism that secures the network while reinforcing scarcity (Hong).</p>
+    <p>This dynamic is compounded by the concentration of ownership. At the end of 2020, a third of all Bitcoin was held by its top 10,000 investors (Makarov and Schoar). When a handful of large holders change their view, the market moves. And when a public figure with millions of followers signals a view, those holders are paying attention.</p>
+    <p>Bitcoin&rsquo;s price history illustrates just how dramatically the market can swing. In late 2017, Bitcoin surged to nearly $20,000, driven in part by a speculative frenzy around Initial Coin Offerings (ICOs), a fundraising mechanism in which blockchain startups sold newly issued tokens to investors. When that bubble burst in early 2018, Bitcoin fell over 80% from its peak, bottoming out below $3,200 by December. Governments across the US, India, and elsewhere moved to regulate crypto assets, major banks prohibited customers from purchasing Bitcoin on credit cards, and a $530 million hack of Tokyo-based exchange Coincheck shook confidence in the market (Chavez-Dreyfuss).</p>
+    <p>In March 2020, Bitcoin sold off alongside global equities during the COVID-19 panic, falling more than 30% in days before recovering sharply by year&rsquo;s end (Wilson). The most striking example of politically-driven price movement came in December 2024, when Bitcoin crossed $100,000 for the first time. Analysts attributed the milestone to the election of pro-crypto U.S. president Donald Trump and his appointment of a crypto-friendly chair to the Securities and Exchange Commission, the primary federal body overseeing financial markets (Wile). The fact that a regulatory appointment could drive Bitcoin to a historic high speaks directly to the premise of this paper: in a market with no fundamentals to anchor it, who holds power and what they signal matters enormously. And increasingly what powerful people signal, they signal on Twitter.</p>
+    <p>In May 2021, Elon Musk tweeted that Tesla would stop accepting Bitcoin over environmental concerns, causing a 10% drop in its value (Flagship). His influence extended further still: in November 2023, he tweeted &lsquo;Optimism is always better.&rsquo; He meant no direct reference to cryptocurrency, but investors interpreted this tweet as an endorsement of the OP token, the native cryptocurrency of the Optimism network. Its price surged 12% within hours (Flagship). This &ldquo;optimism&rdquo; tweet illustrates the core limitation of rules-based approaches. A tweet containing no crypto terminology moved a token 12% through contextual interpretation alone. Capturing this kind of indirect signal requires a model like BERT that understands language in context. This is precisely why a machine learning approach that learns the contextual weight of language is essential to our ability to detect signals that actually move prices.</p>
+  </section>
+
+  <section id="literature" class="fade-in">
+    <h2 class="section-heading">Literature Review</h2>
+    <p>Khatri et al. (2024) surveyed the growing literature on Twitter sentiment and cryptocurrency price prediction, noting that while deep learning approaches have shown promise, the field faces persistent challenges including data quality, limited training data, and the complexity of the relationship between sentiment and price. The studies they reviewed reflect a common methodological trajectory: Rhee et al. (2018) trained a gradient boosting tree model on Twitter and Reddit sentiment data to predict altcoin price fluctuations, achieving over 70% accuracy in predicting price direction; Prajapati (2019) developed a linear regression model using social media sentiment to predict Bitcoin prices, achieving approximately 66% accuracy; and Zhu et al. (2019) built a real-time prediction platform using Twitter sentiment that outperformed both linear regression and random walk baselines. Across these studies, a common limitation is the reliance on keyword-based or lexicon-based sentiment scoring, which captures explicit positive and negative language but cannot account for context, implication, or the identity of the speaker. We see this lexicon based approach in Li and Ma&rsquo;s (2024) study, where they examined the relationship between Twitter post sentiment and the daily price movement of five major cryptocurrencies from 2021 to 2022: Bitcoin (BTC), Ethereum (ETH), Dogecoin (Doge), Cardano (ADA), and Ripple (XRP). They used the dataset CoinMarketCap for daily prices and conducted sentiment analysis with a lexicon dataset from Hu and Liu (2004) that consists of 4782 words that show negative sentiment and 2005 words that exhibit positive sentiment.</p>
+    <p>They found that positive sentiment toward Bitcoin was actually associated with a drop in its daily price, with an average increase in sentiment score corresponding to an expected decrease of $8,382 per coin. They also saw that tweet volume correlated positively with price across all five cryptocurrencies at the 1% significance level. Their most striking finding was that higher engagement correlated negatively with price across all five tokens, which the authors attributed to the tendency of negative posts to attract disproportionate attention. While their study offers valuable evidence that Twitter activity shapes crypto markets, its keyword-based sentiment approach cannot account for context, irony, or indirect references. Our approach addresses this limitation in two ways: by using BERT, which encodes meaning at the level of context rather than surface vocabulary, and by focusing on the posts of specific high-profile individuals rather than treating all Twitter activity as equivalent.</p>
+  </section>
+
+  <section id="model" class="fade-in">
+    <h2 class="section-heading">Our Model</h2>
+    <p>Our model takes a tweet as input and predicts whether the price of Bitcoin will go up, down, or remain roughly flat in the next 4 hours. Each input datapoint consists of a tweet paired with its author, where the tweet text is the primary signal. The author&rsquo;s identity feeds separately into an influence weight, a measure of how strongly that speaker&rsquo;s posts have historically moved Bitcoin prices. The tweet is then passed to BERT (Bidirectional Encoder Representations from Transformers), which encodes it into a vector of numbers which captures both the characters in the tweet and their contextual meaning.</p>
+    <p>We begin with a pretrained BERT-base model which already has read large amounts of text, and finetune its weights on our tweet dataset, making it more sensitive to crypto-specific language. The BERT encoder outputs a single vector representing the tweet, which is then passed on to a two-layer multi-layer perceptron (a small neural network) that maps the vector to three output scores. These output scores correspond to a prediction class that captures the direction of Bitcoin&rsquo;s price in the four hours following the tweet: up (price rises more than 1%), down (price falls more than 1%), or flat (price moves less than 1% in either direction.).</p>
+    <p>For each speaker, we compute a weight based on how strongly their posts have moved Bitcoin prices historically. For example, Michael Saylor, whose Twitter activity is almost entirely Bitcoin-related, scores highest (100%), and the other weights are computed relative to this. A speaker with a high influence weight will cause the model to make stronger directional predictions, and a speaker with a low influence weight will pull predictions towards &ldquo;flat&rdquo;, reflecting the assumption that their posts are less likely to carry a detectable market signal.</p>
+    <div class="arch-diagram">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+        <div>
+          <div class="arch-box tweet" style="margin-bottom:.8rem;"><div class="arch-label">Tweet Text</div><div class="arch-sub">Primary signal</div></div>
+          <div style="text-align:center;color:var(--muted);margin:.3rem 0;">&#8595;</div>
+          <div class="arch-box bert" style="margin-bottom:.8rem;"><div class="arch-label">BERT Encoder</div><div class="arch-sub">Fine-tuned on crypto tweets</div></div>
+          <div style="text-align:center;color:var(--muted);margin:.3rem 0;">&#8595;</div>
+          <div class="arch-box bert" style="border-color:var(--muted);color:var(--muted);margin-bottom:.8rem;"><div class="arch-label">[CLS] Embedding</div><div class="arch-sub">768-dimensional vector</div></div>
+        </div>
+        <div>
+          <div class="arch-box author" style="margin-bottom:.8rem;"><div class="arch-label">Author Identity</div><div class="arch-sub">Speaker lookup</div></div>
+          <div style="text-align:center;color:var(--muted);margin:.3rem 0;">&#8595;</div>
+          <div class="arch-box infl" style="margin-bottom:.8rem;"><div class="arch-label">Influence Scorer</div><div class="arch-sub">Historical price impact</div></div>
+          <div style="text-align:center;color:var(--muted);margin:.3rem 0;">&#8595;</div>
+          <div class="arch-box author" style="margin-bottom:.8rem;"><div class="arch-label">Influence Weight</div><div class="arch-sub">0% &ndash; 100% scalar</div></div>
+        </div>
+      </div>
+      <div style="text-align:center;color:var(--muted);margin:.5rem 0;">&#8595; (modulates scores)</div>
+      <div class="arch-box mlp" style="max-width:180px;margin:0 auto .8rem;"><div class="arch-label">2-Layer MLP</div><div class="arch-sub">768 &rarr; 256 &rarr; 3 scores</div></div>
+      <div style="display:flex;justify-content:center;gap:1rem;margin-top:.5rem;">
+        <div class="arch-box out-up" style="min-width:75px;padding:.35rem .5rem;"><div class="arch-label">&#8593; Up</div><div class="arch-sub">&gt;1% rise</div></div>
+        <div class="arch-box out-flat" style="min-width:75px;padding:.35rem .5rem;"><div class="arch-label">&rarr; Flat</div><div class="arch-sub">&lt;1% move</div></div>
+        <div class="arch-box out-down" style="min-width:75px;padding:.35rem .5rem;"><div class="arch-label">&#8595; Down</div><div class="arch-sub">&gt;1% fall</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="data" class="fade-in">
+    <h2 class="section-heading">Data</h2>
+    <p>We collected tweets from public figures whose statements have historically drawn attention from Bitcoin investors. These figures were: Vitalik Buterin, Changpeng Zhao, Elon Musk, Donald J. Trump and Michael Saylor.</p>
+    <table class="speakers">
+      <thead><tr><th>Name</th><th>Relevance</th><th># of Twitter Followers</th></tr></thead>
+      <tbody>
+        <tr><td><span class="speaker-name">Vitalik Buterin</span></td><td>Co-founder of Ethereum, the world&rsquo;s second-largest blockchain.</td><td><span class="follower-count">6.2 Million</span></td></tr>
+        <tr><td><span class="speaker-name">Changpeng Zhao</span></td><td>Founder and former CEO of Binance, the world&rsquo;s largest cryptocurrency exchange by trading volume.</td><td><span class="follower-count">11.2 Million</span></td></tr>
+        <tr><td><span class="speaker-name">Elon Musk</span></td><td>CEO of Tesla and SpaceX and one of the most influential figures in tech, whose public commentary on cryptocurrencies has triggered significant short-term price swings.</td><td><span class="follower-count">239.9 Million</span></td></tr>
+        <tr><td><span class="speaker-name">Donald Trump</span></td><td>47th U.S. President with a pro-crypto stance, having established the US Strategic Bitcoin Reserve</td><td><span class="follower-count">111.5 Million</span></td></tr>
+        <tr><td><span class="speaker-name">Michael Saylor</span></td><td>Executive Chairman of MicroStrategy, a company holding approximately 76% of all BTC on publicly traded balance sheets.</td><td><span class="follower-count">5 Million</span></td></tr>
+      </tbody>
+    </table>
+    <p>Our collection window runs from March 2023 to March 2025. Each tweet was matched with hourly Bitcoin price data and used to construct a directional label. We recorded the BTC price at the time of the tweet and 4 hours later, computed the percentage return, and assigned a class by using our &plusmn;1% threshold. Our training dataset consisted of tweets ranging from January 2018 to December 2022, and our testing dataset consisted of tweets from January 2023 to December 2025. This ensures the model is never tested on data it has already seen.</p>
+    <p>Many tweets are not explicitly Bitcoin-related, but we still assign them labels because Bitcoin moved in some direction following each post. However, external factors in those time windows may have also influenced prices, introducing noise into the dataset. We attempt to address this through a keyword filter of 29 terms, including &ldquo;bitcoin,&rdquo; &ldquo;btc,&rdquo; &ldquo;eth,&rdquo; &ldquo;crypto,&rdquo; among others. Without changing the underlying class distribution, this filter helps decrease noise in the dataset.</p>
+  </section>
+
+  <section id="results" class="fade-in">
+    <h2 class="section-heading">Results</h2>
+    <p>Our final model v5 has a Macro-F1 of 0.329 on the chronological test set (n=1311), while the unweighted base line (v1) only has a score of 0.289, meaning a 14% improvement. Macro-F1 is the indicator that reflects the ability of minority-class prediction, which fits our context best. The raw accuracy of the model is 62.8%, lower than the 70.6% majority class baseline. This is the expected precision-recall tradeoff under the inverse frequency class weighting.</p>
+    <p>The historical influence weight chart uses Saylor as a baseline, normalizing his weight to 100% and scaling the other figures&rsquo; weights relative to him. Since all his posts are about Bitcoin, his signal is the most reliable reference point.</p>
+    <figure><img src="assets/01_btc_price_history.png" alt="Bitcoin price history 2018–2025" /><figcaption><strong>Figure 1.</strong> Bitcoin price history from 2018 to 2025. The 2018 crash, pandemic sell-off (labeled &ldquo;COVID crash&rdquo;), and spike following the 2024 presidential election. The drop in price in 2025-2026 is not depicted in the timeframe of this graph. We train our model on historical Bitcoin prices from 2018 to 2023 (highlighted in blue), and test our model on prices 2023 to 2025 (highlighted in yellow).</figcaption></figure>
+    <figure><img src="assets/03_training_history.png" alt="Training and validation loss curves" /><figcaption><strong>Figure 2.</strong> Training and validation loss decreased through epoch 2 before validation loss rose at epoch 3, suggesting the onset of overfitting. Validation accuracy outperformed the random baseline of 33% at all epochs, but indicated limited generalization to unseen data.</figcaption></figure>
+    <figure><img src="assets/13_future_price_projection.png" alt="Bitcoin price history and four-hour projection" /><figcaption><strong>Figure 3.</strong> Model output displaying recent Bitcoin price history as well as a four-hour projection based on the tweets analyzed.</figcaption></figure>
+    <figure><img src="assets/08_influence_over_time.png" alt="Per-quarter influence weights over time" /><figcaption><strong>Figure 4.</strong> Per-quarter average absolute 4-hour Bitcoin return following each speaker&rsquo;s tweets, 2023-Q1 through 2025-Q1.</figcaption></figure>
+    <figure><img src="assets/11_per_person_accuracy.png" alt="Per-person prediction accuracy" /><figcaption><strong>Figure 5.</strong> Per-person prediction accuracy as computed on the test set, i.e. tweets from 2023-2025.</figcaption></figure>
+    <div style="margin:1.5rem 0;">
+      <p class="fig-label">Per-Person Prediction Accuracy &middot; Test Set 2023&ndash;2025 (Figure 5)</p>
+      <div class="acc-bars">
+        <div class="acc-row"><span class="acc-name">Vitalik Buterin</span><div class="acc-track"><div class="acc-baseline"></div><div class="acc-fill best" style="width:70.8%"></div></div><span class="acc-pct" style="color:var(--green)">70.8% <span style="font-size:9px;color:var(--muted)">(n=24)</span></span></div>
+        <div class="acc-row"><span class="acc-name">Elon Musk</span><div class="acc-track"><div class="acc-baseline"></div><div class="acc-fill good" style="width:67.7%"></div></div><span class="acc-pct" style="color:var(--green-mid)">67.7% <span style="font-size:9px;color:var(--muted)">(n=768)</span></span></div>
+        <div class="acc-row"><span class="acc-name">Changpeng Zhao</span><div class="acc-track"><div class="acc-baseline"></div><div class="acc-fill mid" style="width:66.1%"></div></div><span class="acc-pct" style="color:var(--teal)">66.1% <span style="font-size:9px;color:var(--muted)">(n=121)</span></span></div>
+        <div class="acc-row"><span class="acc-name">Donald Trump</span><div class="acc-track"><div class="acc-baseline"></div><div class="acc-fill lower" style="width:56.8%"></div></div><span class="acc-pct" style="color:#5a8a6e">56.8% <span style="font-size:9px;color:var(--muted)">(n=241)</span></span></div>
+        <div class="acc-row"><span class="acc-name">Michael Saylor</span><div class="acc-track"><div class="acc-baseline"></div><div class="acc-fill low" style="width:43.9%"></div></div><span class="acc-pct" style="color:var(--muted)">43.9% <span style="font-size:9px;color:var(--muted)">(n=157)</span></span></div>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-top:.4rem;font-family:var(--mono);text-align:left;">&#x258f; vertical line = 33% random baseline</p>
+    </div>
+  </section>
+
+  <section id="modeldevelopment" class="fade-in">
+    <h2 class="section-heading">Model Development: Six Versions</h2>
+    <p>Before choosing v5, we tested in total six models. V1 does not use filters or add class weights. The accuracy of the model is 76.5%, but the prediction results are very biased towards the major class, and the F1 of down and up is 0. This is a classical failure under unbalanced data.</p>
+    <p>V2 expands the label threshold to &plusmn;2% to make the up and down categories more &ldquo;practical&rdquo;. However, with the relatively stable market from 2023 to 2025, this setting compressed each category to only 3%.</p>
+    <p>Then, v3 readjusts the threshold back to &plusmn;1% and adds inverse-frequency class weighting. This version got non-zero down and up F1, and the results were 0.130 and 0.098 respectively. However, the test of v3 still uses an unfiltered test set, so the lift obtained has strong deviations.</p>
+    <p>V4 has corrected this problem. This version adds the same crypto filter on the training set, and the lift is improved to -21.5 pp. The macro-F1 reaches 0.334.</p>
+    <p>The final one v5 is based on v4, but it further uses pd.merge_asof to realize lookahead-safe labeling, and adopts a strict chronological 70/10/20 split. We fix the random seed to be 42.</p>
+    <p>We also tested v6 to add username before BERT input as an explicit author conditioning. However, the performance of v6 is lower than that of v5, macro-F1 is 0.318, while v5 is 0.329. The results show that there is an obvious asymmetry between different authors.</p>
+  </section>
+
+  <section id="discussion" class="fade-in">
+    <h2 class="section-heading">Discussion</h2>
+    <p>The model started to overfit after just two epochs. Since our dataset is relatively small after filtering to crypto-relevant tweets, this is the likely cause of the overfitting. Similarly, there is inherent noise in the data since there are tweets that are not necessarily about Bitcoin but could be interpreted contextually. At the same time, not every one of those tweets may have a crypto-related interpretation. Our aim was to determine which of those tweets were noisy based on Bitcoin&rsquo;s performance afterwards, but this is not always a completely accurate metric as it misses external factors that could have occurred such as geopolitical changes.</p>
+    <p>Our corpus is also not evenly distributed, as Musk and Trump together contribute to the majority of the filtered tweets in the dataset. Since some figures have much fewer tweets relatively, their per-speaker conclusions are more likely to be incorrect due to this asymmetry.</p>
+    <p>Our final model (v5) is 0.329 in Macro-F1 on the test set (n = 1,311), while the benchmark model (v1) is 0.289, an increase of 14%. It is more appropriate to use Macro-F1 as an evaluation indicator because the original accuracy can be easily affected by the most frequent category, which is &ldquo;flat,&rdquo; and accounts for 71% of the data. In other words, if the classifier always predicts &ldquo;flat,&rdquo; it can still get 71% accuracy, but the F1 on the &ldquo;up&rdquo; and &ldquo;down&rdquo; categories will be 0.</p>
+    <p>In order to confirm that our choice of batch size and learning rate of v5 is valid, we tried five groups of sensitivity sweep with learning rate &isin; {5e-6, 1e-5, 2e-5} and batch size &isin; {8, 16, 32}. During the experiment, the data set, data division, random seed, class weights and filter mode remained unchanged. The relevant results are displayed in Figure 6.</p>
+    <figure><img src="assets/05_classification_report_test.png" alt="Sensitivity sweep results" /><figcaption><strong>Figure 6 Sensitivity Sweep</strong></figcaption></figure>
+    <p>The results show that learning rate 2e-5 used from v1 to v3 will degrade the model to majority-class prediction, in which the F1 of the down category is 0.000. This situation is consistent with the failure of unweighted baseline models. Therefore, the adjustment from v3 to v4 of the learning rate to 1e-5 is necessary.</p>
+    <p>Changes in batch size also affect the training results. When batch size = 8, the model collapses in the first epoch, best_epoch = 1, and up F1 drops to 0.000. In contrast, macro-F1 with batch size = 32 is close to batch size = 16, but the training time is much longer and stability is not improved. The lr=5e-6 achieved a macro-F1 of 0.348, slightly higher than v5&rsquo;s 0.330. However, the gap of 0.018 between the two is within the range of single seed fluctuations of BERT fine-tuning (Reimers &amp; Gurevych, 2017). Moreover, the two models that exceed v5 on macro-F1 both have significantly lower accuracy than v5&rsquo;s accuracy of 0.603 (lr_half: 0.515 accuracy; bs_double: 0.541 accuracy). We therefore remain (lr = 1e-5, batch_size = 16) as the v5 configuration.</p>
+    <p>In conclusion, this group of sweep has not found a configuration that is obviously better than v5 in terms of core indicators. The experimental results explain more that the lr = 1e-5 and batch_size = 16 used by v5.</p>
+  </section>
+
+  <section id="deeplearning" class="fade-in">
+    <h2 class="section-heading">The Importance of a Deep Learning Component</h2>
+    <p>For many of the tweets in our dataset, a logistic regression model over term frequency-inverse document frequency features could result in comparable accuracy and results to our model. Such a logistic regression model would count word frequencies given explicitly (for example, &ldquo;bitcoin,&rdquo; or &ldquo;to the moon&rdquo;). However, this logistic regression model would miss nuance and context that can only be learned with a deep learning component to the model. For example, recall the &ldquo;optimism&rdquo; tweet. While this tweet mentions nothing about cryptocurrency or Bitcoin, investors regardless interpreted the tweet as an endorsement of the OP token, a cryptocurrency of the Optimism blockchain network, and its price surged 12% within hours (Flagship). This illustrates the impact subtler, more ambiguous tweets could have on cryptocurrency prices. Without deep learning, a model would be unable to capture the tweets and signals that are most important: those indirect statements that require contextual interpretation.</p>
+  </section>
+
+  <section id="nextsteps" class="fade-in">
+    <h2 class="section-heading">Next Steps</h2>
+    <p>If we had three more months, we would focus on improving our dataset and experimenting with how we evaluate the model. To do so, we could test how the model performs with stricter stopping rules or with different prediction windows. The current v5 model uses the early stopping of patience=2 on validation macro-F1. Following research can try smaller patience settings, such as patience=1. The training record shows that the validation loss has begun to rise at epoch 2, so an earlier stopping may be able to reduce unnecessary calculation. In regards to prediction windows, seeing various time horizons would illustrate how quickly tweet signals decayed. We tested 4-hour horizons, but it would be interesting to see how the model performs if we used 1-hour horizons or even greater than 4-hour horizons. We would imagine shorter windows would show stronger impacts per tweet, but perhaps over time tweets could accumulate traction and show a greater impact if they become &ldquo;viral.&rdquo;</p>
+    <p>If we had more time, we could also test the impact of influence weights. We could run the model with and without them and compare the results to confirm that the weights make a significant contribution to the model.</p>
+  </section>
+
+  <section id="ethics" class="fade-in">
+    <h2 class="section-heading">Ethics and Other Implications</h2>
+    <p>Our model could be used to automate trades around influential posts: an algorithmic trading system could use predictions to determine when to trade. This might amplify the effect of the predictions in that trading volume around the tweets could increase.</p>
+    <p>A model scoring tweets by predicted price impact might allow the figures we based the model on to predict the impact of their own tweets, which could lead to market manipulation. However, this risk is inherently present in any market: influential figures know their words could have an impact on trading volume and asset prices. Our model also only tests a small number of figures relative to the volume of online discussion about Bitcoin and cryptocurrency, so it does not make a broader conclusion about cryptocurrency markets unrelated to the influential tweets.</p>
+  </section>
+
+  <section id="references" class="fade-in">
+    <h2 class="section-heading">Works Cited</h2>
+    <ol class="references-list">
+      <li>Nakamoto, Satoshi. <em>Bitcoin: A Peer-to-Peer Electronic Cash System.</em> Bitcoin.org, Oct. 2008, <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">https://bitcoin.org/bitcoin.pdf</a>.</li>
+      <li>Royal, James, Ph.D. &ldquo;Bitcoin&rsquo;s Price History and Historical Data (2009-2025).&rdquo; <em>Bankrate,</em> 2 Sept. 2025, <a href="https://www.bankrate.com/investing/bitcoin-price-history/" target="_blank" rel="noopener">https://www.bankrate.com/investing/bitcoin-price-history/</a></li>
+      <li>Quiroz-Gutierrez, Marco. &ldquo;Bitcoin Just Hit $100,000, but How Did It Get There?&rdquo; <em>Fortune,</em> 5 Dec. 2024, <a href="https://fortune.com/crypto/2024/12/05/bitcoin-price-100000-btc/" target="_blank" rel="noopener">https://fortune.com/crypto/2024/12/05/bitcoin-price-100000-btc/</a></li>
+      <li>Robson, Kurt. &ldquo;Does Crypto Journalism Affect Price? 12 Years of Research Reveals Answer&rdquo; <em>Crypto Citizens Network,</em> 27 Mar. 2026, <a href="https://www.ccn.com/news/crypto/does-crypto-journalism-affect-price-12-years-of-research-reveals-answer/" target="_blank" rel="noopener">www.ccn.com/news/crypto/does-crypto-journalism-affect-price-12-years-of-research-reveals-answer/</a>.</li>
+      <li>Reiff, Nathan. &ldquo;Why Bitcoin&rsquo;s Price Is So Volatile: Key Factors Explained.&rdquo; <em>Investopedia,</em> 30 Oct. 2025, <a href="https://www.investopedia.com/articles/investing/052014/why-bitcoins-value-so-volatile.asp" target="_blank" rel="noopener">https://www.investopedia.com/articles/investing/052014/why-bitcoins-value-so-volatile.asp</a>.</li>
+      <li>Hong, Euny. &ldquo;How Does Bitcoin Mining Work? A Beginner&rsquo;s Guide.&rdquo; <em>Investopedia,</em> 17 Dec. 2025, <a href="https://www.investopedia.com/tech/how-does-bitcoin-mining-work/" target="_blank" rel="noopener">https://www.investopedia.com/tech/how-does-bitcoin-mining-work/</a>.</li>
+      <li>Makarov, Igor, and Antoinette Schoar. <em>Blockchain Analysis of the Bitcoin Market.</em> National Bureau of Economic Research, Oct. 2021, NBER Working Paper no. 29396, <a href="https://www.nber.org/system/files/working_papers/w29396/w29396.pdf" target="_blank" rel="noopener">https://www.nber.org/system/files/working_papers/w29396/w29396.pdf</a>.</li>
+      <li>Chavez-Dreyfuss, Gertrude. &ldquo;Bitcoin Extends Slide, Falls Below $7,000.&rdquo; <em>Reuters,</em> 6 Feb. 2018, <a href="https://www.reuters.com/article/us-global-markets-bitcoin/bitcoin-extends-slide-falls-below-7000-idUSKBN1FP1EN/" target="_blank" rel="noopener">https://www.reuters.com/article/us-global-markets-bitcoin/bitcoin-extends-slide-falls-below-7000-idUSKBN1FP1EN/</a>.</li>
+      <li>Wile, Rob. &ldquo;Bitcoin Price Hits $100,000 for the First Time.&rdquo; <em>NBC News,</em> 5 Dec. 2024, <a href="https://www.nbcnews.com/business/markets/bitcoin-100000-rcna181008" target="_blank" rel="noopener">https://www.nbcnews.com/business/markets/bitcoin-100000-rcna181008</a>.</li>
+      <li>Wilson, Tom. &ldquo;Bitcoin Plummets as Cryptocurrencies Suffer in Market Turmoil.&rdquo; <em>Reuters,</em> 12 Mar. 2020, <a href="https://www.reuters.com/article/business/bitcoin-plummets-as-cryptocurrencies-suffer-in-market-turmoil-idUSKBN20Z1O7/" target="_blank" rel="noopener">https://www.reuters.com/article/business/bitcoin-plummets-as-cryptocurrencies-suffer-in-market-turmoil-idUSKBN20Z1O7/</a>.</li>
+      <li>&ldquo;Elon Musk&rsquo;s Crypto Influence: How a Single Tweet Can Move Markets.&rdquo; <em>Flagship.FYI,</em> 24 Sept. 2024, <a href="https://flagship.fyi/outposts/market-insights/elon-musks-crypto-influence-how-a-single-tweet-can-move-markets/" target="_blank" rel="noopener">https://flagship.fyi/outposts/market-insights/elon-musks-crypto-influence-how-a-single-tweet-can-move-markets/</a></li>
+      <li>Li, Scott, and Judy Ma. &ldquo;The Impact of Sentiment and Engagement of Twitter Posts on Cryptocurrency Price Movement.&rdquo; <em>Finance Research Letters,</em> vol. 65, 2024, p. 105598, <a href="https://doi.org/10.1016/j.frl.2024.105598" target="_blank" rel="noopener">doi.org/10.1016/j.frl.2024.105598</a>.</li>
+      <li>Khatri, Mahima, et al. &ldquo;Twitteromics: Studying Twitter Sentiments for Cryptocurrency Price Prediction.&rdquo; <em>AIP Conference Proceedings,</em> vol. 3075, 2024, p. 020233, <a href="https://doi.org/10.1063/5.0217163" target="_blank" rel="noopener">doi.org/10.1063/5.0217163</a>.</li>
+    </ol>
+  </section>
+
+  <footer>
+    <div class="footer-rule">Columbia University &middot; Applied Machine Learning &middot; 2025</div>
+    <a href="https://github.com/saamiyalaroia/ml-btc-influence-predictor" target="_blank" rel="noopener" class="github-link">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      View ML Pipeline on GitHub
+    </a>
+  </footer>
+
+</div><!-- /main-content -->
+</div><!-- /shell -->
+
+<script>
+  const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        e.target.querySelectorAll('.acc-fill').forEach(b => setTimeout(() => b.classList.add('animated'), 200));
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav.toc a');
+  const tocObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`nav.toc a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  sections.forEach(s => tocObs.observe(s));
+</script>
+</body>
+</html>
