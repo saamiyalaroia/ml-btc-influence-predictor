@@ -1,13 +1,15 @@
 # Crypto Whisperers: Do the Internet's Loudest Voices Move Bitcoin?
 
 **Saamiya Laroia · Tony Chen · Milena Harned · Alexander Liu**  
-Columbia University · Applied Machine Learning · 2025
+Applied Machine Learning · 2025
+
+🌐 [View Project Website](https://saamiyalaroia.github.io/ml-btc-influence-predictor/)
 
 ---
 
-## Overview
+## Abstract
 
-This project fine-tunes BERT on labeled tweet data from five high-profile figures (Vitalik Buterin, Changpeng Zhao, Elon Musk, Donald Trump, and Michael Saylor) to predict whether Bitcoin's price moves **up**, **down**, or **flat** in the 4 hours following a post. We introduce a *historical influence weight* for each speaker that modulates prediction confidence based on each figure's historical record of moving Bitcoin prices.
+In 2021, Elon Musk added '#bitcoin' to his Twitter bio. Bitcoin jumped 20% in hours. We live in an era where social media has given a handful of individuals the ability to shape market expectations in real time. Cryptocurrency, with no central bank and no earnings reports, is uniquely hypersensitive to sentiment and influence. We ask whether the public statements of five such figures contain a consistent, learnable signal about the direction of Bitcoin prices. Our project explores this question by fine-tuning BERT on labeled tweet data from January 2018 through December 2025, paired with a two-layer MLP classifier, to predict whether Bitcoin's price moves up, down, or stays flat in the 4 hours following a post. While prior work has focused on aggregate social media sentiment, we shift attention to individual voices, introducing a "historical influence weight" for each figure derived from their average absolute impact on Bitcoin returns in the hours following a post. Who is speaking, we argue, matters as much as what is being said.
 
 ---
 
@@ -16,18 +18,21 @@ This project fine-tunes BERT on labeled tweet data from five high-profile figure
 ```
 crypto-whisperers/
 │
-├── main.py                  # Entry point: runs full pipeline
-├── train.py                 # BERT fine-tuning loop
-├── model.py                 # BERT + MLP classifier definition
-├── config.py                # Hyperparameters and run settings
-├── dataset.py               # PyTorch Dataset class
-├── data_loading.py          # Loads and merges tweet + BTC price data
-├── labeling.py              # Assigns up/flat/down labels (±1% threshold)
-├── influence_weights.py     # Computes per-speaker historical influence weights
-├── btc_prices.py            # Fetches and processes hourly BTC price data
-├── backtest.py              # Backtesting simulation on test predictions
-├── visualize.py             # Generates all plots and figures
-├── finalnotebook.ipynb      # End-to-end walkthrough notebook
+├── src/
+│   ├── main.py              # Entry point: runs full pipeline
+│   ├── train.py             # BERT fine-tuning loop
+│   ├── model.py             # BERT + MLP classifier definition
+│   ├── config.py            # Hyperparameters and run settings
+│   ├── dataset.py           # PyTorch Dataset class
+│   ├── data_loading.py      # Loads and merges tweet + BTC price data
+│   ├── labeling.py          # Assigns up/flat/down labels (±1% threshold)
+│   ├── influence_weights.py # Computes per-speaker historical influence weights
+│   ├── btc_prices.py        # Fetches and processes hourly BTC price data
+│   ├── backtest.py          # Backtesting simulation on test predictions
+│   └── visualize.py         # Generates all plots and figures
+│
+├── notebook/
+│   └── finalnotebook.ipynb  # End-to-end walkthrough notebook
 │
 ├── data/                    # Raw and processed tweet + price data (see note below)
 │
@@ -46,8 +51,7 @@ crypto-whisperers/
 │   ├── influence_by_period.csv   # Quarterly influence weights per speaker
 │   └── runs/                     # Per-run logs
 │
-└── assets/
-    └── plots/               # All generated figures (loss curves, influence charts, etc.)
+└── assets/                  # All generated figures (loss curves, influence charts, etc.)
 ```
 
 ---
@@ -218,8 +222,7 @@ If you build on this work, please cite:
 
 ```
 Laroia, S., Chen, T., Harned, M., & Liu, A. (2025). Crypto Whisperers: 
-Do the Internet's Loudest Voices Move Bitcoin? 
-Columbia University Applied Machine Learning.
+Do the Internet's Loudest Voices Move Bitcoin?
 ```
 
 ---
