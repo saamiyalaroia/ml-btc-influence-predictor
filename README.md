@@ -1,6 +1,6 @@
 # Crypto Whisperers: Do the Internet's Loudest Voices Move Bitcoin?
 
-## ₿ [View the Full Paper → saamiyalaroia.github.io/ml-btc-influence-predictor](https://saamiyalaroia.github.io/ml-btc-influence-predictor/)
+## [View the Full Paper → saamiyalaroia.github.io/ml-btc-influence-predictor](https://saamiyalaroia.github.io/ml-btc-influence-predictor/)
 
 ---
 
