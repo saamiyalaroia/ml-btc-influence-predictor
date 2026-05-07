@@ -2,21 +2,21 @@
 
 Fill in this document at the start of the project and keep it up to date.
 
-## 1) Project Overview
+# Class Project Template
 
-- **Title**: Crypto Whisperers — Do the Internet's Loudest Voices Move Bitcoin?
-- **Team**: Saamiya Laroia (sdl2154), Tony Chen (tc3238), Milena Harned (mdh2192), Alexander Liu (al4402)
-- **Problem statement**: Given the text of a tweet from one of five high-influence public figures (Trump, Musk, Saylor, Vitalik Buterin, Changpeng Zhao), predict whether Bitcoin's price will move up (>+1 %), down (<−1 %), or stay flat in the four hours that follow. The task is a 3-class text classification problem on a severely imbalanced and noisy financial-text corpus.
-- **Hypothesis**: A fine-tuned BERT-base classifier — when paired with a crypto-keyword filter and inverse-frequency class weights — can produce predictions that are detectably better than a majority-class baseline in **macro-F1**, even if not in raw accuracy. We expect this because BERT's contextual embeddings should capture indirect signals (e.g. Musk's "Optimism is always better." tweet that moved OP token 12 %) that a bag-of-words baseline cannot.
-
-## 2) Related Work (Short)
-
-- **Tetlock (2007)** — canonical evidence that media sentiment predicts equity returns; framing for our "social-media-as-signal" approach.
-- **Bollen, Mao, Zeng (2011)** — Twitter mood predicts the Dow Jones; first large-scale Twitter→market-prediction study.
-- **Mai et al. (2018)** — extended the Bollen result to Bitcoin specifically; found modest predictive power concentrated in highly active users. Closest in domain to our project.
-- **Araci (2019), FinBERT** — established that fine-tuned BERT on financial corpora beats n-gram baselines; we use the same family of model.
-- **Reimers & Gurevych (2017)** — reporting score distributions matters; we cite this for the ~0.02 single-seed macro-F1 noise floor that motivates our ablation interpretation.
-- **Lin et al. (2017), King & Zeng (2001), Provost (2000)** — class-imbalance literature; we use inverse-frequency weighting from this lineage rather than focal loss.
+Fill in this document at the start of the project and keep it up to date.
+ 
+1) Project Overview
+- **Title**: Crypto Whisperers: Do the Internet's Loudest Voices Move Bitcoin?
+- **Team**: Saamiya Laroia (sdl2154) · Tony Chen (tc3238) · Milena Harned (mdh2192) · Alexander Liu (al4402)
+- **Problem Statement**: Cryptocurrency markets lack the fundamental anchors of traditional assets, making Bitcoin prices uniquely sensitive to public sentiment. While prior research has used aggregate social media sentiment to predict price movements, it has relied on keyword-based approaches that miss contextual meaning and treats all voices as equivalent. This project investigates whether the tweets of five high-profile, market-moving individuals contain a consistent, learnable signal about Bitcoin's short-term price direction.
+- **Hypothesis**: We hypothesize that fine-tuning BERT on tweets from specific influential figures, combined with a speaker-level historical influence weight, will produce better directional price predictions than a baseline model, because context-aware language encoding and speaker identity together capture signal that lexicon-based or aggregate approaches cannot.
+2) Related Work (Short)
+- Early crypto-Twitter sentiment models (Rhee et al., 2018; Prajapati, 2019; Zhu et al., 2019) predicted price direction with modest accuracy using gradient boosting, linear regression, and real-time platforms, but relied on keyword or lexicon-based sentiment scoring that cannot capture context, irony, or speaker identity.
+- Li and Ma (2024) applied a lexicon-based approach (Hu and Liu, 2004) to five major cryptocurrencies from 2021 to 2022, finding that tweet volume correlated positively with price, while higher engagement correlated negatively, suggesting negative posts attract outsized attention.
+- Counterintuitively, positive Bitcoin sentiment was associated with price decreases in Li and Ma's analysis, highlighting how the relationship between sentiment and price is far from straightforward.
+- Khatri et al. (2024) identify persistent field-wide challenges including data quality, limited training data, and the complexity of the sentiment-price relationship, suggesting standard approaches leave meaningful signal on the table.
+- Our approach addresses the lexicon limitation by using BERT for context-aware sentiment encoding and by focusing on posts from specific high-profile individuals rather than treating all Twitter activity as equivalent.
 
 ## 3) Data
 
