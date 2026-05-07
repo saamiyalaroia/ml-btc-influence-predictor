@@ -90,8 +90,6 @@ Tweets were collected from five public figures across two windows:
 - **Training:** January 2018 – December 2022
 - **Testing:** January 2023 – December 2025
 
-Due to Twitter/X API terms of service, raw tweet data is **not included** in this repository. To reproduce data collection, you will need a Twitter/X API key and should replicate the collection queries described in the paper.
-
 ### Bitcoin Prices
 
 Hourly BTC price data was fetched from a public API and merged with tweet timestamps. See `btc_prices.py` for the collection logic.
