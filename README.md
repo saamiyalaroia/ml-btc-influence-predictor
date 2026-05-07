@@ -61,13 +61,13 @@ crypto-whisperers/
 ### Prerequisites
 
 - Python 3.9
-- Conda (recommended) or pip
+- pip
 
 ### Install Dependencies
 
 ```bash
-conda create -n crypto-whisperers python=3.9
-conda activate crypto-whisperers
+python3.9 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -78,7 +78,7 @@ pip install -r requirements.txt
 - `scikit-learn` — evaluation metrics
 - `matplotlib`, `seaborn` — visualization
 
-> A full `requirements.txt` or `env.yaml` is included in the root directory.
+> A full `requirements.txt` is included in the root directory.
 
 ---
 
@@ -166,6 +166,26 @@ Generates all figures (loss curves, per-speaker accuracy, quarterly influence we
 
 ---
 
+## Model Architecture
+
+```
+Tweet Text
+    ↓
+BERT-base (fine-tuned)
+    ↓
+[CLS] Embedding (768-dim)
+    ↓
+2-Layer MLP: 768 → 256 → 3
+    ↓
+Softmax Scores
+    ↑
+Influence Weight (0–100%) — modulates prediction confidence per speaker
+```
+
+Influence weights are normalized relative to Michael Saylor (100%), whose posts are almost entirely Bitcoin-related and serve as the most reliable signal baseline.
+
+---
+
 ## Results Summary
 
 | Model | Macro-F1 | Notes |
@@ -212,6 +232,8 @@ Do the Internet's Loudest Voices Move Bitcoin?
 Some files exceed GitHub's size limit and are not included in this repository. This includes model weights (`best_model.pt`) and any large data files. You can download them here:
 
 📁 [Google Drive — Large Files](https://drive.google.com/file/d/1CZacwoDmkMLDd0t79si4ISXC1fnZGgnd/view?usp=drive_link)
+
+After downloading, place the files in their corresponding folders as described in the repository structure above.
 
 ---
 
