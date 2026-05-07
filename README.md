@@ -7,7 +7,7 @@ Columbia University · Applied Machine Learning · 2025
 
 ## Overview
 
-This project fine-tunes BERT on labeled tweet data from five high-profile figures (Vitalik Buterin, Changpeng Zhao, Elon Musk, Donald Trump, and Michael Saylor) to predict whether Bitcoin's price moves **up**, **down**, or **flat** in the 4 hours following a post. We introduce a per-speaker *historical influence weight* that modulates prediction confidence based on each figure's track record of moving Bitcoin prices.
+This project fine-tunes BERT on labeled tweet data from five high-profile figures (Vitalik Buterin, Changpeng Zhao, Elon Musk, Donald Trump, and Michael Saylor) to predict whether Bitcoin's price moves **up**, **down**, or **flat** in the 4 hours following a post. We introduce a *historical influence weight* for each speaker that modulates prediction confidence based on each figure's historical record of moving Bitcoin prices.
 
 **Final model (v5):** Macro-F1 = 0.329 on test set (n=1,311), a 14% improvement over the unweighted baseline.
 
