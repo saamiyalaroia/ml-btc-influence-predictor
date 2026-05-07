@@ -166,26 +166,6 @@ Generates all figures (loss curves, per-speaker accuracy, quarterly influence we
 
 ---
 
-## Model Architecture
-
-```
-Tweet Text
-    ↓
-BERT-base (fine-tuned)
-    ↓
-[CLS] Embedding (768-dim)
-    ↓
-2-Layer MLP: 768 → 256 → 3
-    ↓
-Softmax Scores
-    ↑
-Influence Weight (0–100%) — modulates prediction confidence per speaker
-```
-
-Influence weights are normalized relative to Michael Saylor (100%), whose posts are almost entirely Bitcoin-related and serve as the most reliable signal baseline.
-
----
-
 ## Results Summary
 
 | Model | Macro-F1 | Notes |
