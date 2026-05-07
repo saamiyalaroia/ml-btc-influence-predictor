@@ -1,7 +1,7 @@
 # Crypto Whisperers: Do the Internet's Loudest Voices Move Bitcoin?
 
 **Saamiya Laroia · Tony Chen · Milena Harned · Alexander Liu**  
-Applied Machine Learning · 2025
+Columbia · Applied Machine Learning · 2025
 
 🌐 [View Project Website](https://saamiyalaroia.github.io/ml-btc-influence-predictor/)
 
@@ -19,7 +19,7 @@ In 2021, Elon Musk added '#bitcoin' to his Twitter bio. Bitcoin jumped 20% in ho
 ml-btc-influence-predictor/
 │
 ├── src/
-│   ├── main.py                  # Entry point: runs full pipeline
+│   ├── main.py                  # runs full pipeline
 │   ├── train.py                 # BERT fine-tuning loop
 │   ├── model.py                 # BERT + MLP classifier definition
 │   ├── config.py                # Hyperparameters and run settings
@@ -45,7 +45,7 @@ ml-btc-influence-predictor/
 │   ├── split_report.json        # Train/val/test split statistics
 │   ├── test_report.json         # Per-class metrics on test set
 │   └── training_history.json    # Loss and accuracy per epoch
-│   └── best_model.pt            # ⚠️ Too large for GitHub — download from Google Drive
+│    
 │
 ├── results/
 │   ├── runs/                    # Per-run logs
@@ -118,8 +118,6 @@ Tweets were collected from five public figures across two windows:
 - **Training:** January 2018 – December 2022
 - **Testing:** January 2023 – December 2025
 
-Due to Twitter/X API terms of service, raw tweet data is **not included** in this repository. To reproduce data collection, you will need a Twitter/X API key and should replicate the collection queries described in the paper.
-
 ### Bitcoin Prices
 
 Hourly BTC price data was fetched from a public API and merged with tweet timestamps. See `btc_prices.py` for the collection logic.
@@ -191,26 +189,6 @@ python visualize.py
 ```
 
 Generates all figures (loss curves, per-speaker accuracy, quarterly influence weights, BTC price history with train/test split) and saves them to `assets/plots/`.
-
----
-
-## Model Architecture
-
-```
-Tweet Text
-    ↓
-BERT-base (fine-tuned)
-    ↓
-[CLS] Embedding (768-dim)
-    ↓
-2-Layer MLP: 768 → 256 → 3
-    ↓
-Softmax Scores
-    ↑
-Influence Weight (0–100%) — modulates prediction confidence per speaker
-```
-
-Influence weights are normalized relative to Michael Saylor (100%), whose posts are almost entirely Bitcoin-related and serve as the most reliable signal baseline.
 
 ---
 
