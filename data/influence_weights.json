@@ -1,0 +1,17 @@
+{
+  "weights": {
+    "realDonaldTrump": 0.813890190106979,
+    "elonmusk": 0.8092310917502938,
+    "cz_binance": 0.7932718424041808,
+    "VitalikButerin": 0.7962279304832974,
+    "saylor": 1.0
+  },
+  "avg_impacts": {
+    "realDonaldTrump": 0.006916213177969085,
+    "elonmusk": 0.006876621451906231,
+    "cz_binance": 0.006741004175792394,
+    "VitalikButerin": 0.00676612419268968,
+    "saylor": 0.008497722742007748
+  },
+  "max_impact": 0.008497722742007748
+}
