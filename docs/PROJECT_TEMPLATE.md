@@ -1,14 +1,14 @@
 # Class Project Template
 Fill in this document at the start of the project and keep it up to date.
 
-1) Project Overview
+## 1) Project Overview
 
 - **Title**: Crypto Whisperers: Do the Internet's Loudest Voices Move Bitcoin?
 - **Team**: Saamiya Laroia (sdl2154) · Tony Chen (tc3238) · Milena Harned (mdh2192) · Alexander Liu (al4402)
 - **Problem Statement**: Cryptocurrency markets lack the fundamental anchors of traditional assets, making Bitcoin prices uniquely sensitive to public sentiment. While prior research has used aggregate social media sentiment to predict price movements, it has relied on keyword-based approaches that miss contextual meaning and treats all voices as equivalent. This project investigates whether the tweets of five high-profile, market-moving individuals contain a consistent, learnable signal about Bitcoin's short-term price direction.
 - **Hypothesis**: We hypothesize that fine-tuning BERT on tweets from specific influential figures, combined with a speaker-level historical influence weight, will produce better directional price predictions than a baseline model, because context-aware language encoding and speaker identity together capture signal that lexicon-based or aggregate approaches cannot.
 
-2) Related Work (Short)
+## 2) Related Work (Short)
 
 - Early crypto-Twitter sentiment models (Rhee et al., 2018; Prajapati, 2019; Zhu et al., 2019) predicted price direction with modest accuracy using gradient boosting, linear regression, and real-time platforms, but relied on keyword or lexicon-based sentiment scoring that cannot capture context, irony, or speaker identity.
 - Li and Ma (2024) applied a lexicon-based approach (Hu and Liu, 2004) to five major cryptocurrencies from 2021 to 2022, finding that tweet volume correlated positively with price, while higher engagement correlated negatively, suggesting negative posts attract outsized attention.
@@ -16,7 +16,7 @@ Fill in this document at the start of the project and keep it up to date.
 - Khatri et al. (2024) identify persistent field-wide challenges including data quality, limited training data, and the complexity of the sentiment-price relationship, suggesting standard approaches leave meaningful signal on the table.
 - Our approach addresses the lexicon limitation by using BERT for context-aware sentiment encoding and by focusing on posts from specific high-profile individuals rather than treating all Twitter activity as equivalent.
 
-3) Data
+## 3) Data
 
 - **Dataset(s)**: Tweets from five public figures — Vitalik Buterin, Changpeng Zhao, Elon Musk, Donald Trump, and Michael Saylor — collected via the Twitter/X API, paired with hourly Bitcoin price data from a public crypto exchange API. Training window: January 2018 – December 2022. Test window: January 2023 – December 2025. After applying a 29-term crypto keyword filter, the labeled dataset contains tweets assigned one of three classes: up (BTC +>1% in 4h), down (BTC ->1% in 4h), or flat (<1% move). The class distribution is heavily skewed toward flat (~71%).
 
@@ -26,7 +26,7 @@ Fill in this document at the start of the project and keep it up to date.
 
 - **Train/val/test split**: Chronological 70/10/20 split. Training: January 2018 – December 2022. Validation: held out from the tail of the training window. Test: January 2023 – December 2025. Splits were constructed using pd.merge_asof with a strict time-based cutoff (random seed 42) to prevent lookahead leakage.
 
-4) Baseline
+## 4) Baseline
 
 - **Baseline model (v1)**: BERT-base-uncased with a 2-layer MLP head (768 → 256 → 3), no class weighting, no keyword filter, ±1% label threshold, lr = 2e-5, batch size 16, 3 epochs.
 - **Baseline metrics**:
@@ -35,7 +35,7 @@ Fill in this document at the start of the project and keep it up to date.
   - The model just predicts "flat" for everything — the expected failure when classes are heavily imbalanced and nothing corrects for it.
 - **Why this is a fair baseline**: Same architecture, same data, no modifications. Any improvement in the final model comes directly from the changes we make, not from a different setup.
 
-5) Proposed Method
+## 5) Proposed Method
 
 - **What we change** (v1 → v5, one addition per version):
   1. **Crypto keyword filter** — 29 keywords that reduce 53,880 tweets to 6,555 by removing posts with no Bitcoin-relevant content (Tesla earnings, political statements, etc.).
@@ -52,7 +52,7 @@ Fill in this document at the start of the project and keep it up to date.
   - v6: prepends the author's username to the BERT input — tested and underperformed v5
   - v5.1: sweep over learning rate and batch size to check v5 settings are reasonable
 
-6) Experiments
+## 6) Experiments
 
 - **Metrics**: Macro-F1 is the main metric because accuracy is misleading here — 78% of tweets are labeled flat, so predicting flat every time gives 78% accuracy but is completely useless. Macro-F1 weights all three classes equally. We also report per-class F1 and per-speaker accuracy on the test set.
 - **Compute budget**: Everything ran on a personal laptop (Apple M3 Pro). Each training run takes 10–25 minutes. All experiments combined took around 3 hours.
@@ -70,7 +70,7 @@ Fill in this document at the start of the project and keep it up to date.
 
 - **Final result**: v5 macro-F1 = 0.329 vs v1 = 0.289, a 14% improvement. v6 scores 0.318 and is outperformed by v5.
 
-7) Reproducibility
+## 7) Reproducibility
 
 - **How to run training**:
   ```bash
